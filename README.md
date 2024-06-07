@@ -1,4 +1,4 @@
-# Hilos
+# Hilos (ALUMNOS: BENNER ALAN, MALDONADO MATEO, ZARATE SEBASTIÁN)
 En un sistema, los procesos que se ejecutan de forma concurrente pueden ser clasificados como independientes o cooperantes. Los procesos independientes operan de manera autónoma, sin depender de otros procesos. Por ejemplo, los intérpretes de comandos en un sistema funcionan de forma independiente. Por otro lado, los procesos cooperantes están diseñados para trabajar juntos en una actividad, requiriendo comunicación e interacción entre sí.
 
 Tanto los procesos independientes como los cooperantes pueden interactuar de dos formas distintas:
