@@ -29,12 +29,12 @@ namespace ClaseHilos
 
       static void Tarea1()
       {
-         foreach(Producto p in productos)
-         {
+        foreach(Producto p in productos)
+        {
             Console.WriteLine($" (1a) Producto: {p.Nombre} - Stock: {p.CantidadEnStock}");
             p.CantidadEnStock += 10;
             Console.WriteLine($"(1b) Producto: {p.Nombre} - NUEVO Stock: {p.CantidadEnStock}");
-         }
+        }
 
          
       }
@@ -44,19 +44,33 @@ namespace ClaseHilos
         precio_dolar = new Random(precio_dolar).Next(500, 600);
         Console.WriteLine($"(2) Precio del dolar: {precio_dolar}");
 
-       }
+      }
 
       static void Tarea3()
       {
-         throw new NotImplementedException();
+         Console.WriteLine("<------------ Informe de Productos ------------>");
+         foreach (Producto p in productos)
+         {
+            Console.WriteLine($"Producto: {p.Nombre}- Stock: {p.CantidadEnStock} - Precio en Pesos: {p.PrecioUnitarioDolares * precio_dolar}");
+ 
+         }
       }
 
       internal static void Excecute()
       {
+            /*
             Thread tarea1 = new Thread(Tarea1);
             Thread tarea2 = new Thread(Tarea2);
             tarea1.Start();
             tarea2.Start();
+            Console.ReadLine();
+            */
+            /*
+            Tarea1();
+            Tarea2();
+            Tarea3();
+            */
+
             Console.ReadLine();
         }
    }
