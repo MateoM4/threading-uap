@@ -29,7 +29,7 @@ namespace ClaseHilos
 
       static Barrier barrier = new Barrier(4, (b) =>
       {
-          Console.WriteLine($"Post-Phase action: {b.CurrentPhaseNumber}");
+         // Console.WriteLine($"Post-Phase action: {b.CurrentPhaseNumber}");
       });
 
       static void Tarea1()
@@ -58,11 +58,14 @@ namespace ClaseHilos
       {
         barrier.SignalAndWait();
          double precio_total = 0;
-         Console.WriteLine("<----------------(3a) Informe de Productos ---------------->");
+         Console.WriteLine("<------------------------(3a) Informe de Productos------------------------>");
          foreach (Producto p in productos)
          {
-            Console.WriteLine($"(3b) Producto: {p.Nombre}- Stock: {p.CantidadEnStock} - Precio en Pesos: {Math.Round((p.PrecioUnitarioDolares * precio_dolar), 2)}");
-            precio_total += Math.Round((p.PrecioUnitarioDolares * precio_dolar), 2);
+            Console.WriteLine($"(3b) Producto: {p.Nombre} | Stock: {p.CantidadEnStock}" +
+                $" | Precio Individual: {Math.Round((p.PrecioUnitarioDolares *precio_dolar), 2)}" +
+                $" | Precio Stock: {Math.Round((p.PrecioUnitarioDolares * p.CantidadEnStock *precio_dolar), 2)}");
+            
+            precio_total += Math.Round((p.PrecioUnitarioDolares * p.CantidadEnStock * precio_dolar), 2);
          }
          Console.WriteLine($"(3c) Precio total del Inventario en pesos: {precio_total}");
         }
@@ -93,17 +96,7 @@ namespace ClaseHilos
             hilo2.Start();
             hilo3.Start();
             hilo4.Start();
-            /*
-            tarea1.Start();
-            tarea2.Start();
-            Console.ReadLine();
-            
-            /*
-            Tarea1();
-            Tarea2();
-            Tarea3();
-            */
-
+         
 
             Console.ReadLine();
         }
