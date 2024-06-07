@@ -31,13 +31,22 @@ namespace ClaseHilos
       {
          foreach(Producto p in productos)
          {
+            Console.WriteLine($"Producto: {p.Nombre} - Stock: {p.CantidadEnStock}");
             p.CantidadEnStock += 10;
-         }
+            Console.WriteLine($"Producto: {p.Nombre} - NUEVO Stock: {p.CantidadEnStock}");
+            }
+
+         
       }
-      static void Tarea2()
+      static void Tarea2(List<Producto> productos)
       {
-         throw new NotImplementedException();
-      }
+         foreach (Producto p in productos)
+            {
+                Console.WriteLine($"Producto: {p.Nombre} - Precio USD: {p.PrecioUnitarioDolares}");
+                p.PrecioUnitarioDolares *= precio_dolar;
+                Console.WriteLine($"Producto: {p.Nombre} - Precio Pesos: {p.PrecioUnitarioDolares}");
+            }
+        }
       static void Tarea3()
       {
          throw new NotImplementedException();
@@ -45,7 +54,10 @@ namespace ClaseHilos
 
       internal static void Excecute()
       {
-         throw new NotImplementedException();
-      }
+            Tarea1(productos);
+            Console.ReadLine();
+            Tarea2(productos);
+            Console.ReadLine();
+        }
    }
 }
