@@ -46,9 +46,10 @@ namespace ClaseHilos
       }
 
       static void Tarea2()
-      {    
+      {
         // el dolar toma un valor aleatorio entre 500 y 600  
-        precio_dolar = new Random(precio_dolar).Next(500, 600);
+        Random random = new Random();
+        int precio_dolar = random.Next(500, 600);
         Console.WriteLine($"(2-) Precio del dolar: {precio_dolar}");
         barrier.SignalAndWait();
 
