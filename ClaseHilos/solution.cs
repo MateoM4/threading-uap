@@ -27,9 +27,12 @@ namespace ClaseHilos
 
       static int precio_dolar = 500;
 
-      static void Tarea1()
+      static void Tarea1(List<Producto> productos)
       {
-         throw new NotImplementedException();
+         foreach(Producto p in productos)
+         {
+            p.CantidadEnStock += 10;
+         }
       }
       static void Tarea2()
       {
