@@ -27,26 +27,25 @@ namespace ClaseHilos
 
       static int precio_dolar = 500;
 
-      static void Tarea1(List<Producto> productos)
+      static void Tarea1()
       {
          foreach(Producto p in productos)
          {
-            Console.WriteLine($"Producto: {p.Nombre} - Stock: {p.CantidadEnStock}");
+            Console.WriteLine($" (1a) Producto: {p.Nombre} - Stock: {p.CantidadEnStock}");
             p.CantidadEnStock += 10;
-            Console.WriteLine($"Producto: {p.Nombre} - NUEVO Stock: {p.CantidadEnStock}");
-            }
+            Console.WriteLine($"(1b) Producto: {p.Nombre} - NUEVO Stock: {p.CantidadEnStock}");
+         }
 
          
       }
-      static void Tarea2(List<Producto> productos)
-      {
-         foreach (Producto p in productos)
-            {
-                Console.WriteLine($"Producto: {p.Nombre} - Precio USD: {p.PrecioUnitarioDolares}");
-                p.PrecioUnitarioDolares *= precio_dolar;
-                Console.WriteLine($"Producto: {p.Nombre} - Precio Pesos: {p.PrecioUnitarioDolares}");
-            }
-        }
+      static void Tarea2()
+      {    
+        // el dolar toma un valor aleatorio entre 500 y 600  
+        precio_dolar = new Random(precio_dolar).Next(500, 600);
+        Console.WriteLine($"(2) Precio del dolar: {precio_dolar}");
+
+       }
+
       static void Tarea3()
       {
          throw new NotImplementedException();
@@ -54,9 +53,10 @@ namespace ClaseHilos
 
       internal static void Excecute()
       {
-            Tarea1(productos);
-            Console.ReadLine();
-            Tarea2(productos);
+            Thread tarea1 = new Thread(Tarea1);
+            Thread tarea2 = new Thread(Tarea2);
+            tarea1.Start();
+            tarea2.Start();
             Console.ReadLine();
         }
    }
