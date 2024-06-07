@@ -49,7 +49,7 @@ namespace ClaseHilos
       {    
         // el dolar toma un valor aleatorio entre 500 y 600  
         precio_dolar = new Random(precio_dolar).Next(500, 600);
-        Console.WriteLine($"(2) Precio del dolar: {precio_dolar}");
+        Console.WriteLine($"(2-) Precio del dolar: {precio_dolar}");
         barrier.SignalAndWait();
 
       }
@@ -57,18 +57,20 @@ namespace ClaseHilos
       static void Tarea3()
       {
         barrier.SignalAndWait();
+         double precio_total = 0;
          Console.WriteLine("<----------------(3a) Informe de Productos ---------------->");
          foreach (Producto p in productos)
          {
             Console.WriteLine($"(3b) Producto: {p.Nombre}- Stock: {p.CantidadEnStock} - Precio en Pesos: {Math.Round((p.PrecioUnitarioDolares * precio_dolar), 2)}");
- 
+            precio_total += Math.Round((p.PrecioUnitarioDolares * precio_dolar), 2);
          }
-      }
+         Console.WriteLine($"(3c) Precio total del Inventario en pesos: {precio_total}");
+        }
 
      static void Tarea4() 
      {
-
-        foreach(Producto p in productos )
+   
+        foreach (Producto p in productos )
         { 
             Console.WriteLine($"(4a) Producto: {p.Nombre} - Precio: {p.PrecioUnitarioDolares}");  
             p.PrecioUnitarioDolares *= 1.10;
