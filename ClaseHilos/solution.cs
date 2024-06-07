@@ -27,6 +27,11 @@ namespace ClaseHilos
 
       static int precio_dolar = 500;
 
+      static Barrier barrier = new Barrier(3, (b) =>
+      {
+          Console.WriteLine($"Post-Phase action: {b.CurrentPhaseNumber}");
+      });
+
       static void Tarea1()
       {
         foreach(Producto p in productos)
@@ -35,19 +40,23 @@ namespace ClaseHilos
             p.CantidadEnStock += 10;
             Console.WriteLine($"(1b) Producto: {p.Nombre} - NUEVO Stock: {p.CantidadEnStock}");
         }
+        barrier.SignalAndWait();
 
-         
+
       }
+
       static void Tarea2()
       {    
         // el dolar toma un valor aleatorio entre 500 y 600  
         precio_dolar = new Random(precio_dolar).Next(500, 600);
         Console.WriteLine($"(2) Precio del dolar: {precio_dolar}");
+        barrier.SignalAndWait();
 
       }
 
       static void Tarea3()
       {
+        barrier.SignalAndWait();
          Console.WriteLine("<---------------- Informe de Productos ---------------->");
          foreach (Producto p in productos)
          {
@@ -58,18 +67,25 @@ namespace ClaseHilos
 
       internal static void Excecute()
       {
+
+            Thread hilo1 = new Thread(new ThreadStart(Tarea1));
+            Thread hilo2 = new Thread(new ThreadStart(Tarea2));
+            Thread hilo3 = new Thread(new ThreadStart(Tarea3));
+
+            hilo1.Start();
+            hilo2.Start();
+            hilo3.Start();
             /*
-            Thread tarea1 = new Thread(Tarea1);
-            Thread tarea2 = new Thread(Tarea2);
             tarea1.Start();
             tarea2.Start();
             Console.ReadLine();
-            */
+            
             /*
             Tarea1();
             Tarea2();
             Tarea3();
             */
+
 
             Console.ReadLine();
         }
