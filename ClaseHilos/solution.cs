@@ -48,7 +48,7 @@ namespace ClaseHilos
 
       static void Tarea3()
       {
-         Console.WriteLine("<------------ Informe de Productos ------------>");
+         Console.WriteLine("<---------------- Informe de Productos ---------------->");
          foreach (Producto p in productos)
          {
             Console.WriteLine($"Producto: {p.Nombre}- Stock: {p.CantidadEnStock} - Precio en Pesos: {p.PrecioUnitarioDolares * precio_dolar}");
