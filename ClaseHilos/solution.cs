@@ -3,10 +3,10 @@ namespace ClaseHilos
    internal class Producto
    {
       public string Nombre { get; set; }
-      public decimal PrecioUnitarioDolares { get; set; }
+      public double PrecioUnitarioDolares { get; set; }
       public int CantidadEnStock { get; set; }
 
-      public Producto(string nombre, decimal precioUnitario, int cantidadEnStock)
+      public Producto(string nombre, double precioUnitario, int cantidadEnStock)
       {
          Nombre = nombre;
          PrecioUnitarioDolares = precioUnitario;
@@ -27,7 +27,7 @@ namespace ClaseHilos
 
       static int precio_dolar = 500;
 
-      static Barrier barrier = new Barrier(3, (b) =>
+      static Barrier barrier = new Barrier(4, (b) =>
       {
           Console.WriteLine($"Post-Phase action: {b.CurrentPhaseNumber}");
       });
@@ -36,7 +36,7 @@ namespace ClaseHilos
       {
         foreach(Producto p in productos)
         {
-            Console.WriteLine($" (1a) Producto: {p.Nombre} - Stock: {p.CantidadEnStock}");
+            Console.WriteLine($"(1a) Producto: {p.Nombre} - Stock: {p.CantidadEnStock}");
             p.CantidadEnStock += 10;
             Console.WriteLine($"(1b) Producto: {p.Nombre} - NUEVO Stock: {p.CantidadEnStock}");
         }
@@ -57,13 +57,27 @@ namespace ClaseHilos
       static void Tarea3()
       {
         barrier.SignalAndWait();
-         Console.WriteLine("<---------------- Informe de Productos ---------------->");
+         Console.WriteLine("<----------------(3a) Informe de Productos ---------------->");
          foreach (Producto p in productos)
          {
-            Console.WriteLine($"Producto: {p.Nombre}- Stock: {p.CantidadEnStock} - Precio en Pesos: {p.PrecioUnitarioDolares * precio_dolar}");
+            Console.WriteLine($"(3b) Producto: {p.Nombre}- Stock: {p.CantidadEnStock} - Precio en Pesos: {Math.Round((p.PrecioUnitarioDolares * precio_dolar), 2)}");
  
          }
       }
+
+     static void Tarea4() 
+     {
+
+        foreach(Producto p in productos )
+        { 
+            Console.WriteLine($"(4a) Producto: {p.Nombre} - Precio: {p.PrecioUnitarioDolares}");  
+            p.PrecioUnitarioDolares *= 1.10;
+            p.PrecioUnitarioDolares = Math.Round(p.PrecioUnitarioDolares, 2);
+            Console.WriteLine($"(4b) Producto: {p.Nombre} - Precio con 10% inflación: {p.PrecioUnitarioDolares}");
+        }
+        barrier.SignalAndWait();
+     }
+      
 
       internal static void Excecute()
       {
@@ -71,10 +85,12 @@ namespace ClaseHilos
             Thread hilo1 = new Thread(new ThreadStart(Tarea1));
             Thread hilo2 = new Thread(new ThreadStart(Tarea2));
             Thread hilo3 = new Thread(new ThreadStart(Tarea3));
+            Thread hilo4 = new Thread(new ThreadStart(Tarea4));
 
             hilo1.Start();
             hilo2.Start();
             hilo3.Start();
+            hilo4.Start();
             /*
             tarea1.Start();
             tarea2.Start();
